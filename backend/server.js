@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const path=require('path');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library'); 
@@ -12,11 +13,22 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET_KEY;
 const tokenBlacklist = new Set(); 
 
+
 // Initialize Express
 const app = express();
 
 // Google OAuth2 Client
 const googleClient = new OAuth2Client(process.env.Google_Id);
+
+// path
+const _dirname=path.resolve();
+
+// join with frontend 
+app.use(express.static(path.join(_dirname,'/frontend/build')))
+
+app.get('*',(_,res)=>{
+  res.sendFile(path.resolve(_dirname,"frontend","build","index.html"))
+})
 
 // Middleware
 app.use(cors({

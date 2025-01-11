@@ -21,6 +21,8 @@ Integration: Uses APIs for fetching product data (https://fakestoreapi.com/produ
 This application is deployed on Render and can be accessed at:
 
 Demo Video 👉 https://drive.google.com/file/d/1_W49ddp8vAiZWhGlMEDl66KeAEwVofqx/view?usp=sharing
+
+
 Live Project 👉 https://e-commerce-dn1b.onrender.com/login
 
 

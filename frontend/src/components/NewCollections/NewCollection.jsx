@@ -25,7 +25,6 @@ const checkImage = (url) => {
 export default function NewCollection() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useContext(CartContext); // Use CartContext
   const navigate = useNavigate(); // Use navigate for routing
   useEffect(() => {
     const fetchData = async () => {

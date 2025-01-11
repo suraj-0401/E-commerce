@@ -51,7 +51,7 @@ const PaymentPage = () => {
     };
 
     handleCheckout();
-  }, [navigate]);
+  }, [navigate,REACT_APP_STRIPE_CODE_FRONT]);
 
   if (error) {
     return (

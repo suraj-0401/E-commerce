@@ -1,3 +1,5 @@
+E-Commerce Website
+
 Welcome to the E-Commerce Website! This is a fully functional e-commerce application designed to provide users with a seamless shopping experience. It features product browsing, detailed product pages, shopping cart functionality, and a smooth checkout process.
 
 🛠️ Features
@@ -12,7 +14,11 @@ Integration: Uses APIs for fetching product data (https://fakestoreapi.com/produ
 🌐 Deployment
 This application is deployed on Render and can be accessed at:
 
- Demo 👉 
+ Demo Video 👉 https://drive.google.com/file/d/1_W49ddp8vAiZWhGlMEDl66KeAEwVofqx/view?usp=sharing
+ Live Project 👉 https://e-commerce-dn1b.onrender.com/login
+
+
+
 
 🚀 Tech Stack
 Frontend: React.js with Tailwind CSS

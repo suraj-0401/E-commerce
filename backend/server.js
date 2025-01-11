@@ -200,6 +200,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
             return res.status(400).json({ message: 'Product data is required' });
         }
 
+        const BASE_URL=process.env.BASE_URL
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: product.map((p) => ({
@@ -213,8 +214,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
                 quantity: 1,
             })),
             mode: 'payment',
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/cancel',
+            success_url: `${BASE_URL}/success`,
+            cancel_url: `${BASE_URL}/cancel`,
         });
 
         res.json({ id: session.id });
@@ -233,7 +234,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Listen on port 5000
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

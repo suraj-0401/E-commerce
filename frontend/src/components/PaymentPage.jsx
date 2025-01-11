@@ -17,7 +17,8 @@ const PaymentPage = () => {
         }
 
         // Fetch session from the backend
-        const response = await fetch('http://localhost:7000/api/create-checkout-session', {
+        const REACT_APP_BASE_URL=process.env.REACT_APP_BASE_URL;
+        const response = await fetch(`${REACT_APP_BASE_URL}/api/create-checkout-session`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

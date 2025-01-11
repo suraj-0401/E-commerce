@@ -8,9 +8,9 @@ const GoogleSignIn = ({ setIsLoggedIn }) => {
   const handleLoginSuccess = async (credentialResponse) => {
 
     const token = credentialResponse.credential;
-
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
     try {
-      const response = await fetch("http://localhost:5000/google-signin", {
+      const response = await fetch(`${BASE_URL}/google-signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -14,8 +14,8 @@ export default function NewsLetter() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/subscribe', { email });
-
+      const API_SUBSCRIBE=process.env.REACT_APP_API_SUBSCRIBE;
+      const response = await axios.post(`${API_SUBSCRIBE}`, { email });
       if (response.status === 200) {
         setMessage('Subscription successful! Check your email for recommended products.');
         setEmail(''); // Clear the email field after successful submission

@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../Assests/logo.png'; // Adjust the path according to your project structure
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -15,19 +16,19 @@ export default function Footer() {
             <div className="mb-6 md:mb-0 flex flex-col items-center md:items-start">
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-blue-400 transition">Home</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition">About</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition">Services</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition">Contact</a></li>
+                <li><Link to="#" className="hover:text-blue-400 transition">Home</Link></li>
+                <li><Link to="#" className="hover:text-blue-400 transition">About</Link></li>
+                <li><Link to="#" className="hover:text-blue-400 transition">Services</Link></li>
+                <li><Link to="#" className="hover:text-blue-400 transition">Contact</Link></li>
               </ul>
             </div>
             <div className="flex flex-col items-center md:items-start">
               <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="#" className="hover:text-blue-400 transition">Facebook</a>
-                <a href="#" className="hover:text-blue-400 transition">Twitter</a>
-                <a href="#" className="hover:text-blue-400 transition">Instagram</a>
-                <a href="#" className="hover:text-blue-400 transition">LinkedIn</a>
+                <Link to="#" className="hover:text-blue-400 transition">Facebook</Link>
+                <Link to="#" className="hover:text-blue-400 transition">Twitter</Link>
+                <Link to="#" className="hover:text-blue-400 transition">Instagram</Link>
+                <Link to="#" className="hover:text-blue-400 transition">LinkedIn</Link>
               </div>
             </div>
           </div>

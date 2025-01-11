@@ -48,7 +48,8 @@ export default function Signup() {
       setErrors({});
       try {
         const data = { fName, lName, email, password, cPassword };
-        const response = await axios.post('http://localhost:5000/signup', data, {
+        const BASE_URL = process.env.REACT_APP_BASE_URL;
+        const response = await axios.post(`${BASE_URL}/signup`, data, {
           headers: {
             'Content-Type': 'application/json',
           },

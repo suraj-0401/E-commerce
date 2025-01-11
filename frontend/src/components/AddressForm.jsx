@@ -11,7 +11,8 @@ const AddressForm = () => {
   const [zip, setZip] = useState('');
   const navigate = useNavigate();
 
-  const stripePromise = loadStripe('pk_test_51PlmgsCRaWWPfJ2zXtlH5ffbPSzV8HaPZXfhBA2SbsmagJ97bnFkKZtY8EHrd6p7rOkJhSZz82zcA2LuMhQkdP6z00v0KaEcAN');
+  const REACT_APP_STRIPE_CODE_FRONT=process.env.REACT_APP_STRIPE_CODE_FRONT;
+  const stripePromise = loadStripe(REACT_APP_STRIPE_CODE_FRONT);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,8 +38,8 @@ const AddressForm = () => {
       const headers = {
         'Content-Type': 'application/json',
       };
-
-      const response = await fetch('http://localhost:7000/api/create-checkout-session', {
+      const REACT_APP_BASE_URL=process.env.REACT_APP_BASE_URL;
+      const response = await fetch(`${REACT_APP_BASE_URL}/api/create-checkout-session`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(body),

@@ -37,7 +37,8 @@ export default function Popular() {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch('https://fakestoreapi.com/products')
+    const API_POPULAR_FAKE_STORE=process.env.REACT_APP_API_POPULAR_FAKE_STORE;
+    fetch(`${API_POPULAR_FAKE_STORE}`)
       .then((response) => response.json())
       .then((data) => {
         // Transform the data to match your existing structure

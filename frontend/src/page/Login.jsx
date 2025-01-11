@@ -37,8 +37,9 @@ export default function Login(props) { // Accept props as a parameter
     } else {
       setErrors({});
       try {
+        const BASE_URL = process.env.REACT_APP_BASE_URL;
         const data = { email, password };
-        const response = await axios.post('http://localhost:5000/login', data, {
+        const response = await axios.post(`${BASE_URL}/login`, data, {
           headers: { 'Content-Type': 'application/json' },
         });
 

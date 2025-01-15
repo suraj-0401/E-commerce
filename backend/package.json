@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "nodemon backend/server.js"
+    "dev": "nodemon server.js",
+    "build": "npm install",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",

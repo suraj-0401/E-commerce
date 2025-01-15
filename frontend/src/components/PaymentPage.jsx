@@ -6,9 +6,15 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const REACT_APP_STRIPE_CODE_FRONT=process.env.REACT_APP_STRIPE_CODE_FRONT;
+  const REACT_APP_STRIPE_CODE_FRONT = process.env.REACT_APP_STRIPE_CODE_FRONT;
+
   useEffect(() => {
     const handleCheckout = async () => {
+      if (!REACT_APP_STRIPE_CODE_FRONT) {
+        setError('Stripe public key is missing');
+        return;
+      }
+
       try {
         const stripe = await loadStripe(REACT_APP_STRIPE_CODE_FRONT);
 
@@ -17,7 +23,7 @@ const PaymentPage = () => {
         }
 
         // Fetch session from the backend
-        const REACT_APP_BASE_URL=process.env.REACT_APP_BASE_URL;
+        const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
         const response = await fetch(`${REACT_APP_BASE_URL}/api/create-checkout-session`, {
           method: 'POST',
           headers: {
@@ -28,9 +34,9 @@ const PaymentPage = () => {
           }),
         });
 
-        // if (!response.ok) {
-        //   throw new Error(`Failed to create checkout session: ${response.statusText}`);
-        // }
+        if (!response.ok) {
+          throw new Error(`Failed to create checkout session: ${response.statusText}`);
+        }
 
         const session = await response.json();
 
@@ -43,7 +49,6 @@ const PaymentPage = () => {
 
         if (result.error) {
           throw new Error(`Stripe Checkout Error: ${result.error.message}`);
-
         }
       } catch (error) {
         setError(error.message);
@@ -51,7 +56,7 @@ const PaymentPage = () => {
     };
 
     handleCheckout();
-  }, [navigate,REACT_APP_STRIPE_CODE_FRONT]);
+  }, [REACT_APP_STRIPE_CODE_FRONT]);
 
   if (error) {
     return (

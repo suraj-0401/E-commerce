@@ -20,16 +20,6 @@ const app = express();
 // Google OAuth2 Client
 const googleClient = new OAuth2Client(process.env.Google_Id);
 
-// path
-const _dirname=path.resolve();
-
-// join with frontend 
-app.use(express.static(path.join(_dirname,'/frontend/build')))
-
-app.get('*',(_,res)=>{
-  res.sendFile(path.resolve(_dirname,"frontend","build","index.html"))
-})
-
 // Middleware
 app.use(cors({
   origin: '*',
@@ -205,37 +195,46 @@ const stripe = Stripe(process.env.Stripe_Code);
 
 // Payment route
 app.post('/api/create-checkout-session', async (req, res) => {
-    try {
-        const { product } = req.body;
+  try {
+      const { product } = req.body;
 
-        if (!product || product.length === 0) {
-            return res.status(400).json({ message: 'Product data is required' });
-        }
+      // Validate product data
+      if (!product || product.length === 0) {
+          return res.status(400).json({ message: 'Product data is required' });
+      }
 
-        const BASE_URL=process.env.BASE_URL
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: product.map((p) => ({
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: p.title,
-                    },
-                    unit_amount: p.price * 100, // Convert price to cents
-                },
-                quantity: 1,
-            })),
-            mode: 'payment',
-            success_url: `${BASE_URL}/success`,
-            cancel_url: `${BASE_URL}/cancel`,
-        });
+      // Ensure the environment variable is set
+      const BASE_URL = process.env.BASE_URL;
+      if (!BASE_URL) {
+          return res.status(500).json({ message: 'BASE_URL environment variable is not defined' });
+      }
 
-        res.json({ id: session.id });
-    } catch (error) {
-        console.error('Error creating Stripe session:', error);
-        res.status(500).send('Server Error');
-    }
+      // Create Stripe session
+      const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: product.map((p) => ({
+              price_data: {
+                  currency: 'usd',
+                  product_data: {
+                      name: p.title,
+                  },
+                  unit_amount: p.price * 100, // Convert price to cents
+              },
+              quantity: 1,
+          })),
+          mode: 'payment',
+          success_url: `${BASE_URL}/success`,
+          cancel_url: `${BASE_URL}/cancel`,
+      });
+
+      // Respond with the session ID
+      res.json({ id: session.id });
+  } catch (error) {
+      console.error('Error creating Stripe session:', error);
+      res.status(500).json({ message: 'Server Error', error: error.message });
+  }
 });
+
 
 // Middleware to check token validity
 app.use((req, res, next) => {

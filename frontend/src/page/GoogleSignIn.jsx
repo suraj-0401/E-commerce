@@ -1,6 +1,7 @@
 import React, {  } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+import { base_url, google_id } from "../Urls";
 
 const GoogleSignIn = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -8,9 +9,8 @@ const GoogleSignIn = ({ setIsLoggedIn }) => {
   const handleLoginSuccess = async (credentialResponse) => {
 
     const token = credentialResponse.credential;
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
     try {
-      const response = await fetch(`${BASE_URL}/google-signin`, {
+      const response = await fetch(`${base_url}/google-signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,10 +44,9 @@ const GoogleSignIn = ({ setIsLoggedIn }) => {
     console.error("Login Failed");
     alert("Login failed. Please try again.");
   };
-  const clientId=process.env.REACT_APP_GOOGLE_ID;
 
   return (
-    <GoogleOAuthProvider clientId={clientId}>
+    <GoogleOAuthProvider clientId={google_id}>
       <div
         style={{
           display: "flex",

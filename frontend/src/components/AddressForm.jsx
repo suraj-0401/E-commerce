@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { CartContext } from '../CartContext/CartContext';
+import { base_url, stripe_Url } from '../Urls';
 
 const AddressForm = () => {
   const { cart } = useContext(CartContext);
@@ -11,8 +12,7 @@ const AddressForm = () => {
   const [zip, setZip] = useState('');
   const navigate = useNavigate();
 
-  const REACT_APP_STRIPE_CODE_FRONT=process.env.REACT_APP_STRIPE_CODE_FRONT;
-  const stripePromise = loadStripe(REACT_APP_STRIPE_CODE_FRONT);
+  const stripePromise = loadStripe(stripe_Url);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,8 +38,7 @@ const AddressForm = () => {
       const headers = {
         'Content-Type': 'application/json',
       };
-      const REACT_APP_BASE_URL=process.env.REACT_APP_BASE_URL;
-      const response = await fetch(`${REACT_APP_BASE_URL}/api/create-checkout-session`, {
+      const response = await fetch(`${base_url}/api/create-checkout-session`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(body),

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { base_url } from '../Urls';
 
 export default function Signup() {
   const [isPassword, setIsPassword] = useState(false);
@@ -48,8 +49,7 @@ export default function Signup() {
       setErrors({});
       try {
         const data = { fName, lName, email, password, cPassword };
-        const BASE_URL = process.env.REACT_APP_BASE_URL;
-        const response = await axios.post(`${BASE_URL}/signup`, data, {
+        const response = await axios.post(`${base_url}/signup`, data, {
           headers: {
             'Content-Type': 'application/json',
           },

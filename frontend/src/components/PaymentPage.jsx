@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
+import { base_url, stripe_Url } from '../Urls';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const REACT_APP_STRIPE_CODE_FRONT = process.env.REACT_APP_STRIPE_CODE_FRONT;
 
   useEffect(() => {
     const handleCheckout = async () => {
-      if (!REACT_APP_STRIPE_CODE_FRONT) {
+      if (!stripe_Url) {
         setError('Stripe public key is missing');
         return;
       }
 
       try {
-        const stripe = await loadStripe(REACT_APP_STRIPE_CODE_FRONT);
+        const stripe = await loadStripe(stripe_Url);
 
         if (!stripe) {
           throw new Error('Stripe.js failed to load');
         }
 
         // Fetch session from the backend
-        const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
-        const response = await fetch(`${REACT_APP_BASE_URL}/api/create-checkout-session`, {
+        const response = await fetch(`${base_url}/api/create-checkout-session`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -56,7 +55,7 @@ const PaymentPage = () => {
     };
 
     handleCheckout();
-  }, [REACT_APP_STRIPE_CODE_FRONT]);
+  }, [stripe_Url]);
 
   if (error) {
     return (

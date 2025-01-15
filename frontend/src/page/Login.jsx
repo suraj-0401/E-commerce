@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GoogleSignIn from './GoogleSignIn';
+import { base_url } from '../Urls';
 
 export default function Login(props) { // Accept props as a parameter
   const [isPassword, setIsPassword] = useState(false);
@@ -37,9 +38,8 @@ export default function Login(props) { // Accept props as a parameter
     } else {
       setErrors({});
       try {
-        const BASE_URL = process.env.REACT_APP_BASE_URL;
         const data = { email, password };
-        const response = await axios.post(`${BASE_URL}/login`, data, {
+        const response = await axios.post(`${base_url}/login`, data, {
           headers: { 'Content-Type': 'application/json' },
         });
 

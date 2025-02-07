@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,lazy,Suspense } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Product from './page/ProductDetail';
@@ -10,13 +10,15 @@ import Footer from './components/Footer/Footer';
 import men_banner from './components/Assests/banner_mens.png';
 import womens_banner from './components/Assests/banner_womens.png';
 import kids_banner from './components/Assests/banner_kids.png';
-import Signup from './page/Signup';
-import Login from './page/Login';
+
 import Popular from './components/Popular/Popular';
 import SuccessPage from './components/SuccessPage';
 import CancelPage from './components/CancelPage'; 
 import AddressForm from './components/AddressForm';
 import PaymentPage from './components/PaymentPage';
+
+const Signup = lazy(() => import('./page/Signup'));
+const Login = lazy(() => import('./page/Login'));
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
@@ -74,10 +76,12 @@ function App() {
             path="/shop"
             element={isLoggedIn ? <Shop /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/login"
             element={isLoggedIn ? <Navigate to="/shop" /> : <Login onLogin={handleLogin} />}
           />
+          
           <Route
             path="/signup"
             element={isLoggedIn ? <Navigate to="/shop" /> : <Signup />}

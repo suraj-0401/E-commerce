@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../CartContext/CartContext'; // Import the CartContext
 
 // Item Component
 function Item({ id, name, image, new_price, old_price }) {
-  const navigate = useNavigate(); // Initialize useNavigate hook
-  const { addItemToCart } = useContext(CartContext); // Use CartContext
+  const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate(`/product/${id}`); // Navigate to ProductDetail page
+    navigate(`/product/${id}`); 
   };
 
   return (
@@ -21,12 +19,7 @@ function Item({ id, name, image, new_price, old_price }) {
         <span className="line-through">${old_price}</span> 
         <span className="text-red-600 ml-2">${new_price}</span>
       </p>
-      <button 
-        onClick={() => addItemToCart({ id, name, image, new_price })} 
-        className="bg-blue-500 text-white py-1 px-4 rounded mt-2 w-full"
-      >
-        Add to Cart
-      </button>
+      
     </div>
   );
 }
@@ -36,18 +29,15 @@ export default function Popular() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the API
-    const API_POPULAR_FAKE_STORE=process.env.REACT_APP_API_POPULAR_FAKE_STORE;
-    fetch(`${API_POPULAR_FAKE_STORE}`)
+    fetch(`https://fakestoreapi.com/products`)
       .then((response) => response.json())
       .then((data) => {
-        // Transform the data to match your existing structure
         const transformedData = data.map((item) => ({
           id: item.id,
           name: item.title,
           image: item.image,
           new_price: item.price,
-          old_price: item.price * 1.2 // Assuming the old price is 20% more
+          old_price: item.price * 1.2 
         }));
         setProducts(transformedData);
       })

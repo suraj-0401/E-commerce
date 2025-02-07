@@ -16,8 +16,7 @@ const AddressForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Save address details in localStorage or state management solution
-    // For example, using localStorage
+    
     localStorage.setItem('address', JSON.stringify({ address, city, zip }));
     navigate('/payment');
   };
@@ -103,12 +102,7 @@ const AddressForm = () => {
         >
           Continue to Payment
         </button><hr />
-        {/* <button
-          type="submit" onClick={()=>navigate(-1)}
-          className="bg-red-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-red-700 transition-colors duration-300"
-        >
-          Go Back
-        </button> */}
+        
       </form>
     </div>
   );

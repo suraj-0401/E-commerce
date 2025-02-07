@@ -7,7 +7,6 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const handleCheckout = async () => {
       if (!stripe_Url) {
@@ -55,21 +54,25 @@ const PaymentPage = () => {
     };
 
     handleCheckout();
-  }, [stripe_Url]);
+  }, []);
 
   if (error) {
     return (
       <div className="container mx-auto p-6 bg-gray-100 min-h-screen flex items-center justify-center">
-        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Error</h1>
-        <p className="text-center text-gray-500">{error}</p>
+        <div>
+          <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Error</h1>
+          <p className="text-center text-gray-500">{error}</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="container mx-auto p-6 bg-gray-100 min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Redirecting to Payment...</h1>
-      <p className="text-center text-gray-500">If the payment page does not load, please check the console for errors.</p>
+      <div>
+        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Redirecting to Payment...</h1>
+        <p className="text-center text-gray-500">If the payment page does not load, please check the console for errors.</p>
+      </div>
     </div>
   );
 };

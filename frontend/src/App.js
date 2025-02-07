@@ -48,30 +48,37 @@ function App() {
             path="/"
             element={isLoggedIn ? <Navigate to="/shop" /> : <Navigate to="/login" />}
           />
+          
           <Route
             path="/mens"
             element={isLoggedIn ? <ShopCategory banner={men_banner} category="mens" /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/womens"
             element={isLoggedIn ? <ShopCategory banner={womens_banner} category="womens" /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/kids"
             element={isLoggedIn ? <ShopCategory banner={kids_banner} category="kids" /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/product/:productId"
             element={isLoggedIn ? <Product /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/popular/:productId"
             element={isLoggedIn ? <Popular /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/cart"
             element={isLoggedIn ? <Cart /> : <Navigate to="/login" />}
           />
+
           <Route
             path="/shop"
             element={isLoggedIn ? <Shop /> : <Navigate to="/login" />}

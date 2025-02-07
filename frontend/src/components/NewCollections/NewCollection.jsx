@@ -30,6 +30,7 @@ export default function NewCollection() {
     const fetchData = async () => {
       try {
         const res = await axios.get('https://api.escuelajs.co/api/v1/products');
+        console.log(res.data)
         const validProducts = [];
         for (const product of res.data) {
           const isValid = await checkImage(product.images[0]);
